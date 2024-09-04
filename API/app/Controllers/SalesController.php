@@ -1,20 +1,20 @@
 <?php
 require_once 'Models/Sales.php';
 
-class CustomerController {
+class SalesController {
     public function getAll() {
-        $customerModel = new Customer();
-        $customers = $customerModel->getAll();
-        
-        header('Content-Type: application/json');
-        echo json_encode($customers);
+        $ventaModel = new Sales();
+        $ventas = $ventaModel->getAll();
+
+        // Renderizar la vista con la lista de ventas
+        require 'ventaList.php';
     }
 
     public function getById($id) {
-        $customerModel = new Customer();
-        $customer = $customerModel->getById($id);
-        
-        header('Content-Type: application/json');
-        echo json_encode($customer);
+        $ventaModel = new Sales();
+        $venta = $ventaModel->getById($id);
+
+        // Renderizar la vista con los detalles de la venta
+        require 'ventaDetail.php';
     }
 }

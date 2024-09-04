@@ -5,7 +5,8 @@ class Customer {
         return [
             ['id' => 1, 'name' => 'Juan Pérez'],
             ['id' => 2, 'name' => 'María García'],
-            ['id' => 3, 'name' => 'Carlos López']
+            ['id' => 3, 'name' => 'Carlos López'],
+            ['id' => 4, 'name' => 'Hector López']
         ];
     }
 
