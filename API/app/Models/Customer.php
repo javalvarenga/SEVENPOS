@@ -1,19 +1,36 @@
 <?php
+
+require_once 'db/conexion.php'; 
+
 class Customer {
+
+    private $db;
+    private $connection;
+
+    public function __construct() {
+        // Crear una instancia de la clase Database y conectarse a la base de datos
+        $this->db = new Database();
+        $this->connection = $this->db->connect();
+    }
+
     public function getAll() {
-        // Simulamos datos de la base de datos
-        return [
-            ['id' => 1, 'name' => 'Juan Pérez'],
-            ['id' => 2, 'name' => 'María García'],
-            ['id' => 3, 'name' => 'Carlos López']
-        ];
+       
+        $result = $this->connection->query("SELECT id_cliente,nombre,direccion,telefono FROM clientes");
+        $customers = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $customers[] = $row;
+        }
+
+        return $customers;
+
     }
 
     public function getById($id) {
         // obtener un cliente por id
         $customers = $this->getAll();
         foreach ($customers as $customer) {
-            if ($customer['id'] == $id) {
+            if ($customer['id_cliente'] == $id) {
                 return $customer;
             }
         }

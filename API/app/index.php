@@ -1,44 +1,55 @@
 <?php
-// index.php
-
+// Autocarga de clases
 spl_autoload_register(function ($class) {
     require_once 'Controllers/' . str_replace('\\', '/', $class) . '.php';
 });
 
-$uri = $_SERVER['REQUEST_URI'];
+// Obtener la URL y descomponerla
+$url = parse_url($_SERVER['REQUEST_URI']);
+$path = $url['path'];
+parse_str($url['query'], $getParams);
+
+// Obtener el método HTTP
 $method = $_SERVER['REQUEST_METHOD'];
 
-// Eliminar la barra inicial y dividir la URI en segmentos
-$uriSegments = explode('/', trim($uri, '/'));
+// Procesar el cuerpo de la solicitud POST
+$postParams = [];
+if ($method === 'POST') {
+    $rawData = file_get_contents('php://input');
+    $postParams = json_decode($rawData, true);
+    // Verificar si la decodificación fue exitosa
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        // Manejar el error de decodificación
+        echo 'Error al decodificar el JSON: ' . json_last_error_msg();
+        exit;
+    }
+}
 
-// Extraer el nombre del controlador y la acción de la URI
-$controllerName = ucfirst($uriSegments[0] ?? '') . 'Controller';
-$actionName = $uriSegments[1] ?? 'index';
+// Combinar los parámetros GET y POST
+$params = array_merge($getParams, $postParams);
 
+// Eliminar la barra inicial si existe
+$path = ltrim($path, '/');
 
-// Recoger los parámetros adicionales solo si existen
-$params = array_slice($uriSegments, 2);
+// Separar la ruta en partes
+$parts = explode('/', $path);
 
+// Obtener el controlador y la acción
+$controllerName = ucfirst($parts[0]) . 'Controller';
+$actionName = $parts[1] ?? 'index';
 
+// Verificar si el controlador y la acción existen
 if (class_exists($controllerName)) {
-    $controller = new $controllerName();
+    $controller = new $controllerName;
     if (method_exists($controller, $actionName)) {
-        // Obtener información sobre el método
-        $reflection = new ReflectionMethod($controller, $actionName);
-        $paramCount = $reflection->getNumberOfParameters();
+        // Llamar a la acción, pasando los parámetros
 
-        // Llamar al método del controlador con los parámetros necesarios
-        if ($paramCount > 0) {
-            $params = array_slice($params, 0, $paramCount);
-            $reflection->invokeArgs($controller, $params);
-        } else {
-            $controller->$actionName();
-        }
+        $controller->$actionName($params);
     } else {
-        header("HTTP/1.0 404 Not Found");
-        echo "404 Not Found: Action does not exist";
+        // Manejar error: Acción no encontrada
+        echo 'Acción no encontrada';
     }
 } else {
-    header("HTTP/1.0 404 Not Found");
-    echo "404 Not Found: Controller does not exist";
+    // Manejar error: Controlador no encontrado
+    echo 'Controlador no encontrado';
 }
