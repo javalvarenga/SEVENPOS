@@ -1,4 +1,12 @@
 <?php
+
+// Permitir solicitudes desde cualquier origen
+header('Access-Control-Allow-Origin: *');
+// Permitir métodos HTTP específicos
+header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+// Permitir cabeceras específicas
+header('Access-Control-Allow-Headers: Content-Type, Authorization');
+
 // Autocarga de clases
 spl_autoload_register(function ($class) {
     require_once 'Controllers/' . str_replace('\\', '/', $class) . '.php';
