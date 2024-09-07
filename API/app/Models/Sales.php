@@ -1,5 +1,5 @@
 <?php
-require_once 'db/Conexion.php'; // Asegúrate de que la ruta es correcta
+require_once 'db/Conexion.php'; 
 
 class Sales {
     private $db;
@@ -12,31 +12,60 @@ class Sales {
     }
 
     public function getAll() {
-        $result = $this->connection->query("SELECT id_cliente,nombre,direccion,telefono FROM clientes");
-        $ventas = [];
+        $result = $this->connection->query("SELECT * FROM facturas");
+        $facturas = [];
 
         while ($row = $result->fetch_assoc()) {
-            $ventas[] = $row;
+            $facturas[] = $row;
         }
 
-        return $ventas;
+        return $facturas;
     }
 
     public function getById($id) {
-        $stmt = $this->connection->prepare("SELECT id_cliente,nombre,direccion,telefono FROM ventas WHERE id = ?");
+        $stmt = $this->connection->prepare("SELECT * FROM facturas WHERE id_empleado = ?");
         $stmt->bind_param('i', $id);
         $stmt->execute();
         $result = $stmt->get_result();
-        $venta = $result->fetch_assoc();
+        $factura = $result->fetch_assoc();
         $stmt->close();
 
-        return $venta;
+        return $factura;
     }
 
+    public function addFactura($id_cliente, $id_empleado, $tipo_pago, $descuento, $detalles) {
+    // Configurar la zona horaria a Guatemala
+    date_default_timezone_set('America/Guatemala');
+
+    // Obtener la fecha y hora actuales
+    $fecha = date('Y-m-d H:i:s');
+
+    // Convertir el array de detalles a JSON
+    $detalles_json = json_encode($detalles);
+
+    // Preparar la llamada al procedimiento almacenado
+    $stmt = $this->connection->prepare("CALL InsertarFactura(?, ?, ?, ?, ?, ?)");
+
+    // Vincular los parámetros al procedimiento almacenado
+    $stmt->bind_param('iissds', $id_cliente, $id_empleado, $fecha, $tipo_pago, $descuento, $detalles_json);
+
+    // Ejecutar el procedimiento almacenado
+    $stmt->execute();
+
+    // Obtener el resultado (el ID de la factura insertada)
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $factura_id = $row['factura_id'];
+
+    $stmt->close();
+
+    return $factura_id;
+}
+
+    
+
     public function __destruct() {
-        // Desconectar de la base de datos al destruir la instancia de Sales
         $this->db->disconnect();
     }
 }
 ?>
-

@@ -7,7 +7,12 @@ spl_autoload_register(function ($class) {
 // Obtener la URL y descomponerla
 $url = parse_url($_SERVER['REQUEST_URI']);
 $path = $url['path'];
-parse_str($url['query'], $getParams);
+
+// Verificar si la URL contiene parámetros de consulta (query string)
+$getParams = [];
+if (isset($url['query'])) {
+    parse_str($url['query'], $getParams);
+}
 
 // Obtener el método HTTP
 $method = $_SERVER['REQUEST_METHOD'];
