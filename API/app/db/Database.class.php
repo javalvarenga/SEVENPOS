@@ -2,8 +2,8 @@
 class Database
 {
     private $host = 'sevenpos.c9pbfyeukwau.us-east-2.rds.amazonaws.com';
-    private $user = 'Kevin';
-    private $password = 'Kevin2024.';
+    private $user = 'Jeremy';
+    private $password = 'Jeremy2024.';
     private $database = 'sevePOS';
 
     public function getConnection()
