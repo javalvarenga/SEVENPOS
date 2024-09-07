@@ -12,7 +12,7 @@ class Sales {
     }
 
     public function getAll() {
-        $result = $this->connection->query("SELECT * FROM facturas");
+        $result = $this->connection->query("SELECT * FROM ventas");
         $facturas = [];
 
         while ($row = $result->fetch_assoc()) {
@@ -23,7 +23,7 @@ class Sales {
     }
 
     public function getById($id) {
-        $stmt = $this->connection->prepare("SELECT * FROM facturas WHERE id_empleado = ?");
+        $stmt = $this->connection->prepare("CALL FACTURA(?)");
         $stmt->bind_param('i', $id);
         $stmt->execute();
         $result = $stmt->get_result();
