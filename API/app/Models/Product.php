@@ -1,4 +1,4 @@
-<?php require_once 'db/Database.class.php'; // Asegúrate de que la ruta es correcta
+<?php require_once 'db/Conexion.php'; // Asegúrate de que la ruta es correcta
 
 class Product {
     private $db;
