@@ -2,6 +2,7 @@
 require_once 'Models/Purchase.php';
 
 class PurchaseController {
+
     public function getAll() {
         $purchaseModel = new Purchase();
         $purchases = $purchaseModel->getAll();
@@ -11,21 +12,38 @@ class PurchaseController {
     }
 
     public function getById($params) {
-        /* Verificar los parámetros */
         if (!isset($params['id']) || !is_numeric($params['id'])) {
             echo json_encode(['error' => 'ID inválido']);
             return;
         }
 
-        /* Instanciar el modelo */
-        $purchaseModel = new Purchase();
         $id = (int)$params['id'];
-
-        /* Obtener la compra por ID */
+        $purchaseModel = new Purchase();
         $purchase = $purchaseModel->getById($id);
 
-        /* Mostrar el resultado en formato JSON */
         header('Content-Type: application/json');
         echo json_encode($purchase ?: ['error' => 'Compra no encontrada']);
     }
+
+    public function create() {
+        $data = json_decode(file_get_contents('php://input'), true);
+
+        if (!isset($data['id_proveedor'], $data['nombre_compra'], $data['fecha'], $data['total'])) {
+            echo json_encode(['error' => 'Faltan datos requeridos']);
+            return;
+        }
+
+        $purchaseModel = new Purchase();
+        $purchaseModel->addPurchase(
+            $data['id_proveedor'],
+            $data['nombre_compra'],
+            $data['fecha'],
+            $data['total']
+        );
+
+        header('Content-Type: application/json');
+        echo json_encode(['message' => 'Compra creada exitosamente']);
+    }
 }
+?>
+
