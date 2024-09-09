@@ -6,7 +6,7 @@
 $validRoutes = [
     '/',
     '/customers',
-    '/contact'
+    '/sales'
 ];
 
 // Obtiene la ruta solicitada
