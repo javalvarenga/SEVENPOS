@@ -12,6 +12,17 @@ class Supplier {
         $this->connection = $this->db->connect();
     }
 
+    public function getAll() {
+        $result = $this->connection->query("SELECT * FROM proveedores");
+        $supplier = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $supplier[] = $row;
+        }
+
+        return $supplier;
+    }
+
     public function getById($id) {
         $stmt = $this->connection->prepare("CALL BuscarProveedor(?)");
         $stmt->bind_param("i", $id);

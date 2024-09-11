@@ -4,6 +4,14 @@ require_once 'Models/Supplier.php';
 
 class SupplierController {
 
+    public function getAll() {
+        $supplierModel = new Supplier();
+        $supplier = $supplierModel->getAll();
+        
+        header('Content-Type: application/json');
+        echo json_encode($supplier);
+    }
+
     public function getById($params) {
         if (!isset($params['id']) || !is_numeric($params['id'])) {
             echo json_encode(['error' => 'ID inválido']);

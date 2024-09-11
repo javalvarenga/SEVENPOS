@@ -35,9 +35,9 @@ class Purchase {
         return $purchase ?: null;
     }
 
-    public function addPurchase($id_proveedor, $nombre_compra, $fecha, $total) {
-        $stmt = $this->connection->prepare("CALL InsertarCompra(?, ?, ?, ?)");
-        $stmt->bind_param('issd', $id_proveedor, $nombre_compra, $fecha, $total);
+    public function addPurchase($id_compra, $id_proveedor, $nombre_compra, $fecha, $total) {
+        $stmt = $this->connection->prepare("CALL InsertarCompra(?, ?, ?, ?, ?)");
+        $stmt->bind_param('iissd', $id_compra, $id_proveedor, $nombre_compra, $fecha, $total);
         $stmt->execute();
         $stmt->close();
 
