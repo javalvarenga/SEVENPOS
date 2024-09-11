@@ -20,7 +20,7 @@
             <td><?= htmlspecialchars($venta['nombre']) ?></td>
             <td><?= htmlspecialchars($venta['direccion']) ?></td>
             <td><?= htmlspecialchars($venta['telefono']) ?></td>
-            <td><a href="ventaDetail.php?id=<?= $venta['id'] ?>">Ver Detalle</a></td>
+            <td><a href="ventaDetail.php?id=<?= $venta['id_cliente'] ?>">Ver Detalle</a></td>
         </tr>
         <?php endforeach; ?>
     </table>
