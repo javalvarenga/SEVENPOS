@@ -15,18 +15,32 @@
             margin: 0;
         }
         .login-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             background: #fff;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             max-width: 400px;
-            padding: 20px;
+            padding: 3rem 1.3rem;
             width: 100%;
         }
-        .login-container h1 {
-            margin-bottom: 20px;
-            color: #333;
+        .login-container img {
+        object-fit: contain;
+        height: 250px;
         }
+        .login-container h1 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: goldenrod;
+            transform: translateY(-10px);
+        }
+
+
+
         .form-group {
+            width: 100%;
             margin-bottom: 15px;
         }
         .form-group label {
@@ -36,7 +50,7 @@
         }
         .form-group input {
             width: 100%;
-            padding: 10px;
+            padding: 1rem 1.3rem;
             border: 1px solid #ddd;
             border-radius: 4px;
             box-sizing: border-box;
@@ -48,7 +62,7 @@
         .login-button {
             width: 100%;
             padding: 10px;
-            background-color: #007bff;
+            background-color: goldenrod;
             border: none;
             border-radius: 4px;
             color: #fff;
@@ -67,6 +81,7 @@
 </head>
 <body>
     <div class="login-container">
+        <img src="../public/img/logoSevenPOS.png" alt="logo">
         <h1>SevenPOS</h1>
         <form action="login.php" method="POST">
             <div class="form-group">
