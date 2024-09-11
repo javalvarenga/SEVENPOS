@@ -6,7 +6,7 @@ import {
 
 /* CARGA INICIAL DE DATOS */
 document.addEventListener('DOMContentLoaded', () => {
-    fetch(API_URL + 'customers/getAll')
+    fetch(API_URL + 'customer/getAll')
         .then(response => response.json())
         .then(data => {
             const tableBody = document.querySelector('#customersTable tbody');
