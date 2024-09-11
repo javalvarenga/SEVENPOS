@@ -3,6 +3,15 @@ require_once 'Models/Sales.php';
 
 class SalesController {
 
+    public function getProducts() {
+        $facturaModel = new Sales();
+        $productos = $facturaModel->getProducts();
+
+        // Devolver el resultado en formato JSON
+        header('Content-Type: application/json');
+        echo json_encode($productos);
+    }
+
     public function getAll() {
         $facturaModel = new Sales();
         $facturas = $facturaModel->getAll();

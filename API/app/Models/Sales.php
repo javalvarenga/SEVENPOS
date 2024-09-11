@@ -11,6 +11,17 @@ class Sales {
         $this->connection = $this->db->connect();
     }
 
+    public function getProducts() {
+        $result = $this->connection->query("SELECT id_producto, nombre FROM productos");
+        $productos = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $productos[] = $row;
+        }
+
+        return $productos;
+    }
+
     public function getAll() {
         $result = $this->connection->query("SELECT * FROM ventas");
         $facturas = [];
