@@ -29,20 +29,45 @@ class SupplierController {
     public function create() {
         $data = json_decode(file_get_contents('php://input'), true);
 
-        if (!isset($data['nombre'], $data['direccion'], $data['telefono'])) {
+        if (!isset($data['id_proveedor'], $data['nombre'], $data['direccion'], $data['telefono'])) {
             echo json_encode(['error' => 'Faltan datos requeridos']);
             return;
         }
 
+        $id_proveedor = (int)$data['id_proveedor'];
+        $nombre = $data['nombre'];
+        $direccion = $data['direccion'];
+        $telefono = $data['telefono'];
+
         $supplierModel = new Supplier();
         $supplierModel->addSupplier(
-            $data['nombre'],
-            $data['direccion'],
-            $data['telefono']
+            $id_proveedor,
+            $nombre,
+            $direccion,
+            $telefono
         );
 
         header('Content-Type: application/json');
         echo json_encode(['message' => 'Proveedor creado exitosamente']);
+    }
+
+    public function delete($params) {
+        if (!isset($params['id']) || !is_numeric($params['id'])) {
+            echo json_encode(['error' => 'ID inválido']);
+            return;
+        }
+
+        $id_proveedor = (int)$params['id'];
+        $supplierModel = new Supplier();
+        $result = $supplierModel->deleteSupplier($id_proveedor);
+
+        if ($result) {
+            header('Content-Type: application/json');
+            echo json_encode(['message' => 'Proveedor eliminado exitosamente']);
+        } else {
+            header('Content-Type: application/json');
+            echo json_encode(['error' => 'Error al eliminar el proveedor']);
+        }
     }
 }
 ?>
