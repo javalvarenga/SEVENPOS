@@ -1,0 +1,71 @@
+  /* Tus estilos CSS van aquí */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#sidebar {
+    width: 100%;
+    max-width: 300px;
+    background-color: #f1f1f1;
+    height: 100vh;
+    position: fixed;
+    left: -300px;
+    transition: left 0.3s ease;
+}
+
+#sidebar.active {
+    left: 0;
+}
+
+#content {
+    margin-top: 55px;
+    padding: 1.3rem;
+    transition: margin-left 0.3s ease;
+}
+
+.menu-item {
+    padding: 1.6rem;
+    cursor: pointer;
+}
+.menu-item i{
+    font-size: 21px;
+    margin-right: 10px;
+    color: rgb(0, 187, 116);
+}
+
+.menu-item:hover {
+    background-color: #ddd;
+}
+
+#menu-toggle {
+    width: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 1000;
+    background-color: #333;
+    color: white;
+    border: none;
+    height: 55px;
+    cursor: pointer;
+}
+
+@media (min-width: 768px) {
+    #menu-toggle {
+        width: 30%;
+        max-width: 300px;
+    }
+
+    #sidebar {
+        margin-top: 55px;
+        width: 30%;
+        left: 0;
+    }
+
+    #content {
+        margin-top: 0px;
+        margin-left: clamp(0px, 30%, 300px);
+    }
+}
