@@ -12,41 +12,39 @@ class Purchase {
     }
 
     // Insertar una nueva compra
-    public function addPurchase($id_compra, $id_proveedor, $nombre_compra, $detalles) {
-        // Configurar la zona horaria a Guatemala
-        date_default_timezone_set('America/Guatemala');
-
-        // Obtener la fecha actual
-        $fecha = date('Y-m-d');
-
+    public function addPurchase($id_proveedor, $nombre_compra, $fecha, $detalles) {
         // Convertir el array de detalles a JSON
         $detalles_json = json_encode($detalles);
-
-        // Preparar la llamada al procedimiento almacenado
-        $stmt = $this->connection->prepare("CALL InsertarCompra(?, ?, ?, ?, ?, ?, ?, ?)");
-
-        // Aquí los parámetros corresponden a los que espera el SP: id_compra, id_proveedor, nombre_compra, id_producto, cantidad, subtotal, fecha, detalles en JSON
-        // Asignamos valores predeterminados para id_producto, cantidad y subtotal que serán procesados en el SP desde el JSON
-        $id_producto = 0;  // Valor predeterminado, será extraído del JSON en el SP
-        $cantidad = 0;     // Valor predeterminado, será extraído del JSON en el SP
-        $subtotal = 0.00;  // Valor predeterminado, será extraído del JSON en el SP
-
+    
+        // Preparar la llamada al procedimiento almacenado con 4 parámetros
+        $stmt = $this->connection->prepare("CALL InsertarCompra(?, ?, ?, ?)");
+    
+        // Verificar si la preparación falló
+        if (!$stmt) {
+            die("Error en la preparación de la consulta: " . $this->connection->error);
+        }
+    
         // Vincular los parámetros al procedimiento almacenado
-        $stmt->bind_param('iissdiss', $id_compra, $id_proveedor, $nombre_compra, $id_producto, $cantidad, $subtotal, $fecha, $detalles_json);
-
+        $stmt->bind_param('isss', $id_proveedor, $nombre_compra, $fecha, $detalles_json);
+    
         // Ejecutar el procedimiento almacenado
-        $stmt->execute();
-
-        // Obtener el resultado (el ID de la compra insertada)
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
-        $compra_id = $row['compra_id'];
-
-        // Cerrar la declaración
+        if ($stmt->execute()) {
+            // Obtener el resultado (el ID de la compra insertada)
+            $result = $stmt->get_result();
+    
+            if ($result) {
+                $row = $result->fetch_assoc();
+                $compra_id = $row['compra_id'];
+            } else {
+                die("Error al obtener el resultado: " . $this->connection->error);
+            }
+        } else {
+            die("Error en la ejecución del procedimiento: " . $this->connection->error);
+        }
+    
         $stmt->close();
-
-        // Retornar el ID de la compra
-        return $compra_id;
+    
+        return isset($compra_id) ? $compra_id : null;
     }
 
     // Obtener todas las compras
