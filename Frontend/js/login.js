@@ -1,36 +1,33 @@
-import { API_URL } from "../utils/constants";
+import { API_URL } from "../utils/constants.js";
 
-const loginForm = document.querySelector('#loginForm');
-const loginButton = document.querySelector('#loginButton');
-const registerButton = document.querySelector('#registerButton');
+const loginForm = document.querySelector("#loginForm");
 
-loginForm.addEventListener('submit', event => {
-    event.preventDefault();
-    const username = document.querySelector('#username').value;
-    const password = document.querySelector('#password').value;
 
-    console.log('log',username, password);
+loginForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const username = document.querySelector("#username").value;
+  const password = document.querySelector("#password").value;
 
-    fetch(API_URL + 'login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            username,
-            password
-        })
+  fetch(API_URL + "user/login", {
+    method: "POST",
+    body: JSON.stringify({
+      username,
+      password,
+    }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data.success) {
+        localStorage.setItem(
+          "USER",
+          JSON.stringify({ ...data.user, login: true })
+        );
+        window.location.href = "/";
+      } else {
+        alert("usuario o contraseña incorrectos");
+      }
     })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                window.location.href = '/';
-            } else {
-                alert('Email o contraseña incorrectos');
-            }
-        })
-        .catch(error => console.error('Error:', error));
+    .catch((error) => console.error("Error:", error));
 });
-
 
 

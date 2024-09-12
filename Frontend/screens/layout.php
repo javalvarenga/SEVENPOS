@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://kit.fontawesome.com/8e0768cae2.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../styles/layout.css">
     <title><?php echo $title ?? 'SEVENPOS'; ?></title>
@@ -54,7 +55,7 @@
                 <i class="fas fa-money-bill-wave"></i> Cuentas por Pagar
             </div>
         </a>
-        <a href="/login">
+        <a id="logout">
             <div class="menu-item">
                 <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión
             </div>
@@ -68,6 +69,12 @@
         document.getElementById('menu-toggle').addEventListener('click', function() {
             document.getElementById('sidebar').classList.toggle('active');
         });
+
+        document.getElementById('logout').addEventListener('click', function() {
+            localStorage.removeItem('USER');
+            window.location.href = '/login';
+        });
+
     </script>
 </body>
 
