@@ -1,5 +1,5 @@
 <?php
-$title = "Clientes - SEVENPOS";
+$title = "INVENTARIO - SEVENPOS";
 
 // Iniciar el buffer de salida para capturar el contenido HTML
 ob_start();
@@ -8,7 +8,7 @@ ob_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clientes</title>
+    <title>Inventario</title>
     <style>
         table {
             width: 100%;
@@ -27,14 +27,14 @@ ob_start();
     </style>
 </head>
 
-    <h1> SEVENPOS - Clientes</h1>
-    <table id="customersTable">
+    <h1> SEVENPOS - INVENTARIO</h1>
+    <table id="MyTable">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>ID Producto</th>
                 <th>Nombre</th>
-                <th>Dirección</th>
-                <th>Teléfono</th>
+                <th>Precio Unitario</th>
+                <th>Unidades</th>
             </tr>
         </thead>
         <tbody>
@@ -42,7 +42,7 @@ ob_start();
         </tbody>
     </table>
 
-    <script type="module" src="../js/customers.js"></script>
+    <script type="module" src="../js/products.js"></script>
 
 
 <?php

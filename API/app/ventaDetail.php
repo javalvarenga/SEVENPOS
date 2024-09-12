@@ -16,6 +16,6 @@
         <p>Venta no encontrada.</p>
     <?php endif; ?>
 
-    <a href="ventaList.php">Volver a la lista</a>
+    <a href="ventaList">Volver a la lista</a>
 </body>
 </html>
