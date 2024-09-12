@@ -32,7 +32,7 @@ class PurchaseController {
         $data = json_decode(file_get_contents('php://input'), true);
 
         // Verificar los campos requeridos
-        if (!isset($data['id_compra'], $data['id_proveedor'], $data['nombre_compra'], $data['fecha'], $data['total'], $data['detalles'])) {
+        if (!isset($data['id_compra'], $data['id_proveedor'], $data['nombre_compra'], $data['detalles'])) {
             echo json_encode(['error' => 'Faltan datos requeridos']);
             return;
         }
@@ -46,13 +46,11 @@ class PurchaseController {
         $id_compra = $data['id_compra'];
         $id_proveedor = $data['id_proveedor'];
         $nombre_compra = $data['nombre_compra'];
-        $fecha = $data['fecha'];
-        $total = $data['total'];
         $detalles = $data['detalles']; // Detalles en formato JSON (array)
 
         // Llamar al modelo para insertar la compra
         $purchaseModel = new Purchase();
-        $compra_id = $purchaseModel->addPurchase($id_compra, $id_proveedor, $nombre_compra, $fecha, $total, $detalles); // Llamada a addPurchase adaptada
+        $compra_id = $purchaseModel->addPurchase($id_compra, $id_proveedor, $nombre_compra, $detalles); // Llamada a addPurchase adaptada
 
         header('Content-Type: application/json');
         echo json_encode(['message' => 'Compra creada exitosamente', 'compra_id' => $compra_id]);
