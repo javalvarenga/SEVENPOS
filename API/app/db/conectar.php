@@ -1,8 +1,8 @@
 <?php
 class Database {
     private $host = 'sevenpos.c9pbfyeukwau.us-east-2.rds.amazonaws.com';
-    private $username = 'Kevin';
-    private $password = 'Kevin2024.';
+    private $username = 'Jeremy';
+    private $password = 'Jeremy2024.';
     private $database = 'SevenPOS';
     private $connection;
 
