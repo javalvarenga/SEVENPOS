@@ -62,6 +62,9 @@
         </a>
     </div>
     <div id="content">
+    <a href="/">
+    <i class="fa-solid fa-house" style="color:goldenrod;font-size:25px"></i>
+    </a>
         <!-- Aquí se cargará el contenido específico de cada página -->
         <?php echo $content ?? ''; ?>
     </div>

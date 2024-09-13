@@ -36,7 +36,7 @@ ob_start();
             justify-self: center;
         }
 
-        div{
+        form > div{
             padding-top: 10px;
             padding-bottom: 10px;
            
