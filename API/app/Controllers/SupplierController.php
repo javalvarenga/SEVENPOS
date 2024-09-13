@@ -29,19 +29,17 @@ class SupplierController {
     public function create() {
         $data = json_decode(file_get_contents('php://input'), true);
 
-        if (!isset($data['id_proveedor'], $data['nombre'], $data['direccion'], $data['telefono'])) {
+        if (!isset($data['nombre'], $data['direccion'], $data['telefono'])) {
             echo json_encode(['error' => 'Faltan datos requeridos']);
             return;
         }
 
-        $id_proveedor = (int)$data['id_proveedor'];
         $nombre = $data['nombre'];
         $direccion = $data['direccion'];
         $telefono = $data['telefono'];
 
         $supplierModel = new Supplier();
         $supplierModel->addSupplier(
-            $id_proveedor,
             $nombre,
             $direccion,
             $telefono

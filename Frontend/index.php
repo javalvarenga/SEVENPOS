@@ -38,7 +38,9 @@ $validRoutes = [
     '/payments',
     '/receivable',
     '/toPay',
-    '/addSale'
+    '/addSale',
+    '/addPurchase',
+    '/suppliers'
 ];
 
 // Obtiene la ruta solicitada
@@ -70,6 +72,10 @@ if (in_array($requestUri, $validRoutes)) {
         include 'screens/toPay.php';
     } elseif ($requestUri === '/addSale') {
         include 'screens/addSale.php';
+    }elseif ($requestUri === '/addPurchase') {
+        include 'screens/addPurchase.php';
+    }elseif ($requestUri === '/suppliers') {
+        include 'screens/suppliers.php';
     }
 } else {
     // Si la ruta no es válida, muestra la página 404

@@ -11,25 +11,20 @@ class Purchase {
         $this->connection = $this->db->connect();
     }
 
-    // Insertar una nueva compra
+    // Cargar datos
     public function addPurchase($id_proveedor, $nombre_compra, $fecha, $detalles) {
-        // Convertir el array de detalles a JSON
         $detalles_json = json_encode($detalles);
     
-        // Preparar la llamada al procedimiento almacenado con 4 parámetros
         $stmt = $this->connection->prepare("CALL InsertarCompra(?, ?, ?, ?)");
     
-        // Verificar si la preparación falló
         if (!$stmt) {
             die("Error en la preparación de la consulta: " . $this->connection->error);
         }
     
-        // Vincular los parámetros al procedimiento almacenado
         $stmt->bind_param('isss', $id_proveedor, $nombre_compra, $fecha, $detalles_json);
     
-        // Ejecutar el procedimiento almacenado
         if ($stmt->execute()) {
-            // Obtener el resultado (el ID de la compra insertada)
+
             $result = $stmt->get_result();
     
             if ($result) {
@@ -49,7 +44,18 @@ class Purchase {
 
     // Obtener todas las compras
     public function getAllPurchases() {
-        $result = $this->connection->query("SELECT * FROM compras");
+            $query = "SELECT c.id_compra, c.fecha, p.nombre AS proveedor_nombre, d.id_producto, pr.nombre AS producto_nombre, d.cantidad, d.subtotal
+                FROM compras c
+                JOIN detalle_compras d ON c.id_compra = d.id_compra
+                JOIN proveedores p ON c.id_proveedor = p.id_proveedor
+                JOIN productos pr ON d.id_producto = pr.id_producto";
+        
+        $result = $this->connection->query($query);
+        
+        if (!$result) {
+            die("Error en la consulta: " . $this->connection->error);
+        }
+
         $purchases = [];
 
         while ($row = $result->fetch_assoc()) {
@@ -58,7 +64,6 @@ class Purchase {
 
         return $purchases;
     }
-
     // Obtener una compra por ID
     public function getPurchaseById($id) {
         $stmt = $this->connection->prepare("SELECT * FROM compras WHERE id_compra = ?");
