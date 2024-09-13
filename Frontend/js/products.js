@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     fetch(API_URL + 'product/getAll')
         .then(response => response.json())
         .then(data => {
-            const tableBody = document.querySelector('#MyTable');
+            const tableBody = document.querySelector('#MyTable tbody');
             data.forEach(product => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td>${product.precio}</td>
                     <td>${product.unidades}</td>
                     <td>
-                        <button>Editar</button> 
                         <button class="btn-eliminar" data-id="${product.id_producto}">Eliminar</button>
                     </td>
                 `;
@@ -42,43 +41,61 @@ document.addEventListener('DOMContentLoaded', () => {
             // Añadir evento al botón "Nuevo Producto"
             document.querySelector('#btn-nuevo-producto').addEventListener('click', () => {
                 document.querySelector('#modal-nuevo-producto').style.display = 'flex'; // Mostrar el modal
+                document.querySelector('#form-nuevo-producto').reset(); // Limpiar el formulario
+                document.querySelector('#form-nuevo-producto').setAttribute('data-action', 'create');
             });
 
             // Configuración del modal
-            const modal = document.querySelector('#modal-nuevo-producto');
-            const closeButton = document.querySelector('.close-button');
-            
-            closeButton.addEventListener('click', () => {
-                modal.style.display = 'none'; // Ocultar el modal
+            const modalNuevo = document.querySelector('#modal-nuevo-producto');
+            const closeButtonNuevo = document.querySelector('#modal-nuevo-producto .close-button');
+
+            closeButtonNuevo.addEventListener('click', () => {
+                modalNuevo.style.display = 'none'; // Ocultar el modal
             });
 
             window.addEventListener('click', (event) => {
-                if (event.target === modal) {
-                    modal.style.display = 'none'; // Ocultar el modal si se hace clic fuera de él
+                if (event.target === modalNuevo) {
+                    modalNuevo.style.display = 'none'; // Ocultar el modal si se hace clic fuera de él
                 }
             });
 
-            // Manejo del formulario
-            const form = document.querySelector('#form-nuevo-producto');
-            form.addEventListener('submit', (event) => {
+            // Manejo del formulario de nuevo producto
+            const formNuevo = document.querySelector('#form-nuevo-producto');
+            formNuevo.addEventListener('submit', (event) => {
                 event.preventDefault();
 
-                const idProducto = document.querySelector('#id_producto').value;
                 const nombre = document.querySelector('#nombre').value;
                 const precio = document.querySelector('#precio').value;
                 const unidades = document.querySelector('#unidades').value;
+                const action = formNuevo.getAttribute('data-action');
 
-                fetch(API_URL + 'product/create', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        id_producto: idProducto,
+                let url = API_URL + 'product/';
+                let method = 'POST';
+                let body = JSON.stringify({
+                    nombre: nombre,
+                    precio: precio,
+                    unidades: unidades
+                });
+
+                if (action === 'update') {
+                    url += 'update';
+                    method = 'PUT';
+                    body = JSON.stringify({
+                        id_producto: formNuevo.getAttribute('data-id'),
                         nombre: nombre,
                         precio: precio,
                         unidades: unidades
-                    })
+                    });
+                } else {
+                    url += 'create';
+                }
+
+                fetch(url, {
+                    method: method,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: body
                 })
                 .then(response => {
                     if (!response.ok) {
@@ -88,8 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
                 .then(data => {
                     console.log('Producto guardado:', data);
-                    modal.style.display = 'none'; // Ocultar el modal
-                    form.reset(); // Limpiar el formulario
+                    modalNuevo.style.display = 'none'; // Ocultar el modal
+                    formNuevo.reset(); // Limpiar el formulario
                     location.reload(); // Recargar la página para reflejar los cambios
                 })
                 .catch(error => console.error('Error:', error));

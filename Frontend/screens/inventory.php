@@ -130,28 +130,25 @@ ob_start();
         </tbody>
     </table>
 
-    <!-- Modal para agregar nuevo producto -->
-    <div id="modal-nuevo-producto" class="modal">
-        <div class="modal-content">
-            <span class="close-button">&times;</span>
-            <h2>Agregar Nuevo Producto</h2>
-            <form id="form-nuevo-producto">
-                <label for="id_producto">ID Producto:</label>
-                <input type="text" id="id_producto" name="id_producto" required><br><br>
+<!-- Modal para agregar nuevo producto -->
+<div id="modal-nuevo-producto" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Agregar Nuevo Producto</h2>
+        <form id="form-nuevo-producto">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required><br><br>
 
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" required><br><br>
+            <label for="precio">Precio:</label>
+            <input type="number" id="precio" name="precio" step="0.01" required><br><br>
 
-                <label for="precio">Precio:</label>
-                <input type="number" id="precio" name="precio" step="0.01" required><br><br>
+            <label for="unidades">Unidades:</label>
+            <input type="number" id="unidades" name="unidades" step="1" required><br><br>
 
-                <label for="unidades">Unidades:</label>
-                <input type="number" id="unidades" name="unidades" required><br><br>
-
-                <button type="submit">Registrar Producto</button>
-            </form>
-        </div>
+            <button type="submit">Registrar Producto</button>
+        </form>
     </div>
+</div>
 
     <script type="module" src="../js/products.js"></script>
 

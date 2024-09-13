@@ -32,12 +32,12 @@ class Product {
     }
 
 
-    public function addProduct ($id_producto, $nombre, $precio, $unidades){
-        // Preparar la llamada al procedimiento almacenado
-    $stmt = $this->connection->prepare("CALL InsertarProducto(?, ?, ?, ?)");
+   public function addProduct($nombre, $precio, $unidades){
+    // Preparar la llamada al procedimiento almacenado
+    $stmt = $this->connection->prepare("CALL InsertarProducto(?, ?, ?)");
 
-    // Vincular los parámetros al procedimiento almacenado
-    $stmt->bind_param('isdi', $id_producto, $nombre, $precio, $unidades);
+    // Vincular los parámetros al procedimiento almacenado (eliminar el id_producto)
+    $stmt->bind_param('sdi', $nombre, $precio, $unidades);
 
     // Ejecutar el procedimiento almacenado
     $stmt->execute();
@@ -75,12 +75,12 @@ public function deleteProduct($id_producto) {
     return $mensaje;
 }
 
-public function updateProduct($id_producto, $nombre, $precio, $unidades) {
+public function updateProduct( $nombre, $precio, $unidades, $id_producto,) {
     // Preparar la llamada al procedimiento almacenado
     $stmt = $this->connection->prepare("CALL ActualizarProducto(?, ?, ?, ?)");
 
     // Vincular los parámetros al procedimiento almacenado
-    $stmt->bind_param('isdi', $id_producto, $nombre, $precio, $unidades);
+    $stmt->bind_param('sdii', $nombre, $precio, $unidades, $id_producto);
 
     // Ejecutar el procedimiento almacenado
     $stmt->execute();
