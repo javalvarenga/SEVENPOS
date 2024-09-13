@@ -5,7 +5,7 @@ class PurchaseController {
 
     public function getAll() {
         $purchaseModel = new Purchase();
-        $purchases = $purchaseModel->getAll();
+        $purchases = $purchaseModel->getAllPurchases();
         
         header('Content-Type: application/json');
         echo json_encode($purchases);
@@ -19,7 +19,7 @@ class PurchaseController {
 
         $id = (int)$params['id'];
         $purchaseModel = new Purchase();
-        $purchase = $purchaseModel->getById($id);
+        $purchase = $purchaseModel->getPurchaseById($id);
 
         header('Content-Type: application/json');
         echo json_encode($purchase ?: ['error' => 'Compra no encontrada']);
@@ -27,23 +27,34 @@ class PurchaseController {
 
     public function create() {
         $data = json_decode(file_get_contents('php://input'), true);
-
-        if (!isset($data['id_proveedor'], $data['nombre_compra'], $data['fecha'], $data['total'])) {
+    
+        // Validar que todos los campos requeridos estén presentes
+        if (!isset($data['id_proveedor'], $data['nombre_compra'], $data['fecha'], $data['detalles'])) {
             echo json_encode(['error' => 'Faltan datos requeridos']);
             return;
         }
-
+    
+        // Verificar que detalles sea un array
+        if (!is_array($data['detalles'])) {
+            echo json_encode(['error' => 'Detalles deben ser un array']);
+            return;
+        }
+    
+        // Crear el modelo y llamar a la función addPurchase
         $purchaseModel = new Purchase();
-        $purchaseModel->addPurchase(
+        $compra_id = $purchaseModel->addPurchase(
             $data['id_proveedor'],
             $data['nombre_compra'],
             $data['fecha'],
-            $data['total']
+            $data['detalles']
         );
-
-        header('Content-Type: application/json');
-        echo json_encode(['message' => 'Compra creada exitosamente']);
+    
+        if ($compra_id) {
+            header('Content-Type: application/json');
+            echo json_encode(['compra_id' => $compra_id, 'message' => 'Compra creada exitosamente']);
+        } else {
+            echo json_encode(['error' => 'Error al crear la compra']);
+        }
     }
 }
 ?>
-
