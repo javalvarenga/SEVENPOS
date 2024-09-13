@@ -1,5 +1,9 @@
+import {
+    API_URL
+} from '../utils/constants.js';
+
 document.addEventListener('DOMContentLoaded', function() {
-    fetch('http://localhost:8000/Sales/getProducts')
+    fetch(API_URL + 'Sales/getProducts')
         .then(response => response.json())
         .then(data => {
             let productoSelects = document.querySelectorAll('.producto_select');
@@ -66,7 +70,7 @@ document.getElementById('addProducto').addEventListener('click', function() {
 // Manejo del envío del formulario
 document.getElementById('ventaForm').addEventListener('submit', function(e) {
     e.preventDefault();  // Evitar el envío tradicional
-
+    //const user = localStorage.getItem('USER');
     let formData = {
         nombre: document.getElementById('nombre').value,
         direccion: document.getElementById('direccion').value,
@@ -101,7 +105,8 @@ document.getElementById('ventaForm').addEventListener('submit', function(e) {
     })
     .then(response => response.json())
     .then(data => {
-        document.getElementById('result').innerText = JSON.stringify(data);
+        //document.getElementById('result').innerText = JSON.stringify(data);
+        alert("La venta se ha realizado con exito. \nVenta: "+  data.Venta);
     })
     .catch(error => console.error('Error:', error));
 });

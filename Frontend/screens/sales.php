@@ -13,109 +13,71 @@ ob_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clientes</title>
     <style>
-
-        form{
-            padding-left: 90px;
-        }
-        
-        input,option {
-            width: 80%;
+        table {
+            width: 100%;
             border-collapse: collapse;
+        }
+
+        th,
+        td {
             border: 1px solid #ddd;
             padding: 8px;
-            display: flex;
-            justify-self: center;
         }
 
-        select{
-            width: 83.5%;
-            border-collapse: collapse;
-            border: 1px solid #ddd;
-            padding: 8px;
-            display: flex;
-            justify-self: center;
+        th {
+            background-color: #f4f4f4;
         }
 
-        div{
-            padding-top: 10px;
-            padding-bottom: 10px;
-           
-        }
-        
-
-        button, input[type="submit"] {
-            width: 83%;
-            padding: 10px;
+        button{
+            width: 10%;
+            padding: 10px 20px;
             border: none;
+            border-radius: 4px;
             background-color: #28a745;
             color: white;
             cursor: pointer;
             transition: transform 0.2s ease, background-color 0.3s ease;
+            margin-bottom: 10px;
         }
 
-        button:hover, input[type="submit"]:hover {
+        button:hover{
             background-color: #218838;
         }
 
-        button:active, input[type="submit"]:active {
+        button:active{
             transform: scale(0.95);
+        }
+
+        .button-container {
+            text-align: right;
+            margin-bottom: 10px;
         }
 
     </style>
 </head>
-
+    <div class="button-container">
+        <button onclick="window.location.href='addSale'">Nueva venta</button>
+    </div>    
     
-<form id="ventaForm">
-        <label for="nombre">Nombre del Cliente:</label>
-        <input type="text" id="nombre" name="nombre" required><br><br>
+    <table id="facturasTable">
+        <thead>
+            <tr>
+                <th>Venta</th>
+                <th>Fecha</th>
+                <th>Cliente</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio unitario</th>
+                <th>Descuento</th>
+                <th>total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Los datos se llenarán aquí con JavaScript -->
+        </tbody>
+    </table>
 
-        <label for="direccion">Dirección:</label>
-        <input type="text" id="direccion" name="direccion" required><br><br>
-
-        <label for="telefono">Teléfono:</label>
-        <input type="text" id="telefono" name="telefono" required><br><br>
-
-        <label for="correo">Correo:</label>
-        <input type="email" id="correo" name="correo" required><br><br>
-
-        <label for="nit">NIT:</label>
-        <input type="text" id="nit" name="nit" required><br><br>
-
-        <label for="cui">CUI:</label>
-        <input type="text" id="cui" name="cui" required><br><br>
-
-        <!--<label for="id_empleado">ID Empleado:</label>
-        <input type="number" id="id_empleado" name="id_empleado" required><br><br>-->
-
-        <label for="tipo_pago">Tipo de Pago:</label>
-        <input type="text" id="tipo_pago" name="tipo_pago" required><br><br>
-
-        <label for="descuento">Descuento:</label>
-        <input type="number" step="0.01" id="descuento" name="descuento" required><br><br>
-
-        <h3 style="grid-column: span 2;">Detalles de los Productos</h3>
-        <div id="productos">
-            <div class="producto">
-                <label for="producto_select">Producto:</label>
-                <select  name="id_producto" class="producto_select" required>
-                    <option value="">Seleccione un producto</option>
-                </select>
-
-                <!--<label for="id_producto">ID del Producto:</label>
-                <input type="number" id="id_producto" name="id_producto" required>-->
-                
-                <label for="cantidad">Cantidad:</label>
-                <input type="number" id="cantidad" name="cantidad" required>
-            </div>
-        </div>
-        <button type="button" id="addProducto">Agregar Producto</button><br><br>
-
-        <input type="submit" value="Registrar Venta">
-    </form>
-
-    <div id="result"></div>
-
-    <script type="module" src="../js/sales.js"></script>
+    <script type="module" src="../js/salesMain.js"></script>
 
 
 
