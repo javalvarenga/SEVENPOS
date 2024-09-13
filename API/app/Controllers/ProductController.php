@@ -29,22 +29,21 @@ class ProductController {
     public function create(){
         // Leer el cuerpo de la solicitud y decodificar el JSON
         $data = json_decode(file_get_contents('php://input'), true);
-
+    
         // Validar que los datos requeridos están presentes
-        if (!isset($data['id_producto'],$data['nombre'],$data['precio'],$data['unidades'])) {
+        if (!isset($data['nombre'], $data['precio'], $data['unidades'])) {
             echo json_encode(['error' => 'Faltan datos requeridos']);
             return;
         }
-
+    
         $ProductModel = new Product();
         $pro = $ProductModel->addProduct(
-            $data['id_producto'],
             $data['nombre'],
             $data['precio'],
-            $data['unidades'],
+            $data['unidades']
         );
-
-        // Devolver el ID de la factura creada en formato JSON
+    
+        // Devolver la información del producto creado en formato JSON
         header('Content-Type: application/json');
         echo json_encode(['Producto' => $pro]);
     }
@@ -75,17 +74,17 @@ class ProductController {
         $data = json_decode(file_get_contents('php://input'), true);
     
         // Validar que los datos requeridos estén presentes
-        if (!isset($data['id_producto'], $data['nombre'], $data['precio'], $data['unidades'])) {
+        if (!isset($data['nombre'], $data['precio'], $data['unidades'], $data['id_producto'])) {
             echo json_encode(['error' => 'Faltan datos requeridos']);
             return;
         }
     
         $ProductModel = new Product();
         $mensaje = $ProductModel->updateProduct(
-            $data['id_producto'],
             $data['nombre'],
             $data['precio'],
-            $data['unidades']
+            $data['unidades'],
+            $data['id_producto']
         );
     
         // Devolver el mensaje en formato JSON
