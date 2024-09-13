@@ -23,7 +23,7 @@ class Sales {
     }
 
     public function getAll() {
-        $result = $this->connection->query("SELECT * FROM ventas");
+        $result = $this->connection->query("call reporte_facturas()");
         $facturas = [];
 
         while ($row = $result->fetch_assoc()) {
