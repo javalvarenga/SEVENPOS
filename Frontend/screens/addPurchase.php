@@ -45,6 +45,11 @@ ob_start();
             box-sizing: border-box;
         }
 
+        .button-container-right {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
         button, input[type="submit"] {
             width: 50%;
             padding: 10px;
@@ -75,14 +80,19 @@ ob_start();
             flex-grow: 1;
         }
 
+        .button-container-center {
+            text-align: center;
+        }
+
     </style>
 </head>
 
 <body>
     <h1>SEVENPOS - Compras</h1>
 
-    <button onclick="window.location.href='purchases'">Volver</button>
-    <button onclick="window.location.href='suppliers'">Proveedores</button>
+    <div class="button-container-right">
+        <button onclick="window.location.href='purchases'">Volver</button>
+    </div>
 
     <form id="purchaseForm">
         <label for="proveedor_select">Proveedor:</label>
@@ -116,11 +126,10 @@ ob_start();
             </div>
         </div>
 
-        <button type="button" id="addProducto">Agregar Producto</button><br><br>
-
-        <input type="submit" value="Registrar Compra">
-
-    </div> 
+        <div class="button-container-center">
+            <button type="button" id="addProducto">Agregar Producto</button><br><br>
+            <input type="submit" value="Registrar Compra">
+        </div>
     </form>
 
     <div id="result"></div>

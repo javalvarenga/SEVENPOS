@@ -40,9 +40,9 @@
                 <i class="fas fa-users"></i> Clientes
             </div>
         </a>
-        <a href="/payments">
+        <a href="/suppliers">
             <div class="menu-item">
-                <i class="fas fa-credit-card"></i> Pagos
+            <i class="fa-solid fa-user-tie"></i> Proveedores
             </div>
         </a>
         <a href="/receivable">
