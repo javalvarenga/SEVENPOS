@@ -72,9 +72,8 @@ ob_start();
                 <th>Venta</th>
                 <th>Fecha</th>
                 <th>Cliente</th>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Precio unitario</th>
+                <th>Productos</th>
+                <th>Cantidad de productos</th>
                 <th>Descuento</th>
                 <th>total</th>
             </tr>

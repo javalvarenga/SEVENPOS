@@ -54,7 +54,7 @@ document.getElementById('addProducto').addEventListener('click', function() {
     document.getElementById('productos').appendChild(productoDiv);
 
     // Recargar las opciones de productos en el nuevo select
-    fetch('http://localhost:8000/Sales/getProducts')
+    fetch(API_URL + 'Sales/getProducts')
         .then(response => response.json())
         .then(data => {
             data.forEach(producto => {
@@ -96,7 +96,7 @@ document.getElementById('ventaForm').addEventListener('submit', function(e) {
     });
 
     // Enviar los datos a través de AJAX
-    fetch('http://localhost:8000/Sales/create', {
+    fetch(API_URL + 'Sales/create', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -107,6 +107,19 @@ document.getElementById('ventaForm').addEventListener('submit', function(e) {
     .then(data => {
         //document.getElementById('result').innerText = JSON.stringify(data);
         alert("La venta se ha realizado con exito. \nVenta: "+  data.Venta);
+
+        document.getElementById('ventaForm').reset();
+        const productosDiv = document.getElementById('productos');
+        productosDiv.innerHTML = `
+            <div class="producto">
+                <label for="producto_select">Producto:</label>
+                <select name="id_producto" class="producto_select" required>
+                    <option value="">Seleccione un producto</option>
+                </select>
+                <label for="cantidad">Cantidad:</label>
+                <input type="number" id="cantidad" name="cantidad" required>
+            </div>
+        `;
     })
     .catch(error => console.error('Error:', error));
 });
