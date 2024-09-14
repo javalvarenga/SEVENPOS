@@ -1,4 +1,11 @@
 a{
     text-decoration: none;
     color: black;
+
 }
+
+#MyTable td {
+
+    text-align: center;
+}
+
