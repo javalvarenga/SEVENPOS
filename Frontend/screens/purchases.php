@@ -74,7 +74,7 @@ ob_start();
         </tbody>
     </table>
 
-    <script type="module" src="../js/purchaseMain.js"></script>
+    <script type="module" src="../js/purchasemain.js"></script>
 
 <?php
 // IMPORTANTE PARA USAR EL LAYOUT Asignar el contenido capturado a la variable $content
