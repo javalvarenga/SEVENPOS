@@ -1,9 +1,7 @@
 <?php
-
-require_once 'db/conectar.php'; 
+require_once 'db/Conexion.php'; 
 
 class Customer {
-
     private $db;
     private $connection;
 
@@ -14,26 +12,43 @@ class Customer {
     }
 
     public function getAll() {
-       
-        $result = $this->connection->query("SELECT id_cliente,nombre,direccion,telefono FROM clientes");
-        $customers = [];
+        $result = $this->connection->query("SELECT * FROM clientes");
+        $clientes = [];
 
         while ($row = $result->fetch_assoc()) {
-            $customers[] = $row;
+            $clientes[] = $row;
         }
 
-        return $customers;
-
+        return $clientes;
     }
 
-    public function getById($id) {
-        // obtener un cliente por id
-        $customers = $this->getAll();
-        foreach ($customers as $customer) {
-            if ($customer['id_cliente'] == $id) {
-                return $customer;
-            }
+    public function getHistorialid($id) 
+    {
+        // Preparar la consulta SQL para llamar al procedimiento almacenado
+        $stmt = $this->connection->prepare("CALL HistorialCliente(?)");
+
+        // Vincular los parámetros a la consulta
+        $stmt->bind_param('i', $id);
+
+        // Ejecutar la consulta
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $purchases = []; // Inicializar el array
+
+        while ($row = $result->fetch_assoc())
+        {
+            $purchases[] = $row;
         }
-        return null;
+
+        $stmt->close();
+        return $purchases;
     }
+
+
+    public function __destruct() {
+        $this->db->disconnect();
+    }
+    
 }
+?>
