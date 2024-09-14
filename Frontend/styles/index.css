@@ -16,6 +16,8 @@ a{
 }
 
 .indicators {
+    max-width: 1100px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
@@ -54,6 +56,12 @@ a{
 th{
     background-color: goldenrod;
     color: white;
+}
+
+#chart{
+    max-width: 1100px;
+    max-height: 800px;
+    margin: 0 auto;
 }
 
 @media (min-width: 768px) {
