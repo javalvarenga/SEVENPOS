@@ -34,9 +34,9 @@ class Supplier {
         return $supplier ?: null;
     }
 
-    public function addSupplier($id_proveedor, $nombre, $direccion, $telefono) {
-        $stmt = $this->connection->prepare("CALL InsertarProveedor(?, ?, ?, ?)");
-        $stmt->bind_param('isss', $id_proveedor, $nombre, $direccion, $telefono);
+    public function addSupplier($nombre, $direccion, $telefono) {
+        $stmt = $this->connection->prepare("CALL InsertarProveedor(?, ?, ?)");
+        $stmt->bind_param('sss', $nombre, $direccion, $telefono);
         $stmt->execute();
         $stmt->close();
 

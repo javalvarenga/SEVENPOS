@@ -5,101 +5,76 @@ $title = "Compras - SEVENPOS";
 ob_start();
 ?>
 
-<h1> SEVENPOS - Compras</h1>
+<h1>SEVENPOS - Resumen de Compras</h1>
+<!------------------------------------------------------>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compras</title>
-
     <style>
-        form {
-            padding-left: 90px;
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
 
-        input, option {
-            width: 80%;
+        th, td {
             border: 1px solid #ddd;
             padding: 8px;
-            display: flex;
-            justify-self: center;
         }
 
-        select {
-            width: 83.5%;
-            border: 1px solid #ddd;
-            padding: 8px;
-            display: flex;
-            justify-self: center;
+        th {
+            background-color: #f4f4f4;
         }
 
-        div {
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-
-        button, input[type="submit"] {
-            width: 83%;
-            padding: 10px;
+        button {
+            width: 10%;
+            padding: 10px 20px;
             border: none;
+            border-radius: 4px;
             background-color: #28a745;
             color: white;
             cursor: pointer;
             transition: transform 0.2s ease, background-color 0.3s ease;
+            margin-bottom: 10px;
         }
 
-        button:hover, input[type="submit"]:hover {
+        button:hover {
             background-color: #218838;
         }
 
-        button:active, input[type="submit"]:active {
+        button:active {
             transform: scale(0.95);
+        }
+
+        .button-container {
+            text-align: right;
+            margin-bottom: 10px;
         }
     </style>
 </head>
-
 <body>
-<form id="purchaseForm">
-    <label for="proveedor_select">Proveedor:</label>
-    <select id="proveedor_select" name="id_proveedor" class="proveedor_select" required>
-        <option value="">Seleccione un proveedor</option>
-    </select><br><br>
+    <div class="button-container">
+        <button onclick="window.location.href='addPurchase'">Nueva compra</button>
+    </div>    
 
-    <label for="nombre_compra">Nombre de la Compra:</label>
-    <input type="text" id="nombre_compra" name="nombre_compra" required><br><br>
+    <table id="comprasTable">
+        <thead>
+            <tr>
+                <th>Compra</th>
+                <th>Fecha</th>
+                <th>Proveedor</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Los datos se llenarán aquí con JavaScript -->
+        </tbody>
+    </table>
 
-    <label for="fecha">Fecha:</label>
-    <input type="date" id="fecha" name="fecha" required><br><br>
-
-    <h3>Detalles de los Productos</h3>
-    <div id="productos">
-   
-        <div class="producto">
-            <label for="producto_select">Producto:</label>
-            <select name="id_producto" class="producto_select" required>
-                <option value="">Seleccione un producto</option>
-            </select>
-
-            <label for="cantidad">Cantidad:</label>
-            <input type="number" name="cantidad" class="cantidad" required>
-
-            <label for="precio">Precio:</label>
-            <input type="number" name="precio" class="precio" step="0.01" required>
-
-            <label for="subtotal">Subtotal:</label>
-            <input type="number" name="subtotal" class="subtotal" step="0.01" required readonly>   
-        </div>
-    </div>
-
-    <button type="button" id="addProducto">Agregar Producto</button><br><br>
-    <input type="submit" value="Registrar Compra">
-</form>
-
-    <div id="result"></div>
-
-    <script type="module" src="../js/purchase.js"></script>
-</body>
-
+    <script type="module" src="../js/purchaseMain.js"></script>
 
 <?php
 // IMPORTANTE PARA USAR EL LAYOUT Asignar el contenido capturado a la variable $content
