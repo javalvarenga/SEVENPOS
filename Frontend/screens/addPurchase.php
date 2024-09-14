@@ -21,9 +21,6 @@ ob_start();
             padding: 8px;
         }
 
-        th {
-            background-color: #f4f4f4;
-        }
 
         form {
             width: 100%;
@@ -84,15 +81,24 @@ ob_start();
             text-align: center;
         }
 
+        .button-container button{
+            max-width: 100px;
+        }
+
+
+        #purchaseForm{
+            max-width: 1200px;
+            margin: 0 auto;
+        }
     </style>
 </head>
 
 <body>
     <h1>SEVENPOS - Compras</h1>
 
-    <div class="button-container-right">
-        <button onclick="window.location.href='purchases'">Volver</button>
-    </div>
+    <div class="button-container">
+        <button class="btn2" onclick="window.location.href='purchases'"><i class="fa-solid fa-arrow-left"></i></button>
+    </div>   
 
     <form id="purchaseForm">
         <label for="proveedor_select">Proveedor:</label>

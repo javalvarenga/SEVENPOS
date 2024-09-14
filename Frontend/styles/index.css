@@ -51,6 +51,11 @@ a{
     color: #666;
 }
 
+th{
+    background-color: goldenrod;
+    color: white;
+}
+
 @media (min-width: 768px) {
     .card {
         display: inline-block;

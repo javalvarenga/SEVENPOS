@@ -24,9 +24,7 @@ ob_start();
             padding: 8px;
         }
 
-        th {
-            background-color: #f4f4f4;
-        }
+   
 
         form > div{
             padding-top: 10px;
@@ -56,8 +54,14 @@ ob_start();
         }
 
         .button-container {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
             text-align: right;
             margin-bottom: 10px;
+        }
+        .button-container button{
+            max-width: 200px;
         }
 
     </style>

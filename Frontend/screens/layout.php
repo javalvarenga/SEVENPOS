@@ -30,11 +30,6 @@
                 <i class="fas fa-box"></i> Inventario
             </div>
         </a>
-        <a href="/devolutions">
-            <div class="menu-item">
-                <i class="fas fa-undo"></i> Devoluciones
-            </div>
-        </a>
         <a href="/customers">
             <div class="menu-item">
                 <i class="fas fa-users"></i> Clientes
@@ -45,16 +40,7 @@
             <i class="fa-solid fa-user-tie"></i> Proveedores
             </div>
         </a>
-        <a href="/receivable">
-            <div class="menu-item">
-                <i class="fas fa-dollar-sign"></i> Cuentas por Cobrar
-            </div>
-        </a>
-        <a href="/toPay">
-            <div class="menu-item">
-                <i class="fas fa-money-bill-wave"></i> Cuentas por Pagar
-            </div>
-        </a>
+       
         <a id="logout">
             <div class="menu-item">
                 <i class="fa-solid fa-right-from-bracket"></i> Cerrar Sesión

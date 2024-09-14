@@ -23,21 +23,8 @@ ob_start();
             padding: 8px;
         }
 
-        th {
-            background-color: #f4f4f4;
-        }
-
-        button {
-            width: 10%;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            background-color: #28a745;
-            color: white;
-            cursor: pointer;
-            transition: transform 0.2s ease, background-color 0.3s ease;
-            margin-bottom: 10px;
-        }
+   
+   
 
         button:hover {
             background-color: #218838;
@@ -49,6 +36,17 @@ ob_start();
 
         .button-container {
             text-align: right;
+            margin-bottom: 10px;
+        }
+        .button-container button {
+            width: 10%;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.3s ease;
             margin-bottom: 10px;
         }
     </style>

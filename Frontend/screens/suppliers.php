@@ -19,9 +19,6 @@ ob_start();
             padding: 8px;
         }
 
-        th {
-            background-color: #f4f4f4;
-        }
 
         /* Estilo del modal */
         .modal {

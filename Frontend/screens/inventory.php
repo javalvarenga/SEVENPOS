@@ -21,9 +21,15 @@ ob_start();
         padding: 8px;
     }
 
-    th {
-        background-color: #f4f4f4;
+
+    .btn-eliminar{
+        background-color: #ef233c;
+        color:white;
+        border: none;
+        border-radius: 10px;
+        padding: 0.6rem 1rem;
     }
+  
 
     /* Estilo del modal */
     .modal {

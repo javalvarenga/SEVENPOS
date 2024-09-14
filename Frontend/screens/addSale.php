@@ -74,9 +74,12 @@ ob_start();
         }
 
         .button-container {
+            width: 100%;
+            display: flex;
             text-align: left;
             margin-bottom: 10px;
         }
+        
 
     </style>
 </head>
