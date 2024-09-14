@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 series: [{
                   name: 'total vendido',
-                  data: indicators.VentasUltimos7Dias.split(',').map(Number)
+                  data: indicators.VentasUltimos7Dias.split(',').map(Number).reverse()
                 }],
                 xaxis: {
                   categories: last7Days
