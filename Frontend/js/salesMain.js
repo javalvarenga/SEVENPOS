@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
                    <td>${factura.nombre}</td>
                    <td>${factura.producto}</td>
                    <td>${factura.cantidad}</td>
-                   <td>${factura.precio}</td>
                    <td>${factura.descuento}</td>
                    <td>${factura.total}</td>
                `;

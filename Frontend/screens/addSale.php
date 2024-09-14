@@ -5,7 +5,7 @@ $title = "Ventas - SEVENPOS";
 ob_start();
 ?>
 
-<h1> SEVENPOS - Nueva venta</h1>
+
 
 
 <head>
@@ -61,11 +61,34 @@ ob_start();
             transform: scale(0.95);
         }
 
+        .btn2{
+            width: 5%;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #28a745;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        .button-container {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+
     </style>
 </head>
-<div>
+<!--<div>
 <i class="fa-solid fa-plus"></i>
-</div>
+</div>-->
+
+    <div class="button-container">
+        <button class="btn2" onclick="window.location.href='sales'"><i class="fa-solid fa-arrow-left"></i></button>
+    </div>   
+<h1> SEVENPOS - Nueva venta</h1>
+     
     
 <form id="ventaForm">
         <label for="nombre">Nombre del Cliente:</label>
