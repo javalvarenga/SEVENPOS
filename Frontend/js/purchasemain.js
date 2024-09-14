@@ -3,6 +3,7 @@ import {
 } from '../utils/constants.js';
 
 document.addEventListener('DOMContentLoaded', function () {
+    // Cargar Productos
     fetch(API_URL + 'Purchase/getAll')
     .then(response => {
         if (!response.ok) {

@@ -105,7 +105,7 @@ document.getElementById('ventaForm').addEventListener('submit', function(e) {
     })
     .then(response => response.json())
     .then(data => {
-        //document.getElementById('result').innerText = JSON.stringify(data);
+        
         alert("La venta se ha realizado con exito. \nVenta: "+  data.Venta);
 
         document.getElementById('ventaForm').reset();
