@@ -29,7 +29,10 @@ class User {
         }
     
         $stmt->close();
-    
+        
+        // Debug: ver qué está devolviendo
+        error_log("Login attempt - Username: $username, Result count: " . count($user));
+        
         return $user;
     }
 

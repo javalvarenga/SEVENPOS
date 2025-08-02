@@ -42,7 +42,7 @@ class SalesController {
         $data = json_decode(file_get_contents('php://input'), true);
 
         // Validar que los datos requeridos están presentes
-        if (!isset($data['nombre'],$data['direccion'],$data['telefono'],$data['correo'],$data['nit'],$data['cui'], $data['id_empleado'], $data['tipo_pago'], $data['descuento'], $data['detalles'])) {
+        if (!isset($data['nombre'],$data['direccion'],$data['telefono'],$data['correo'],$data['nit'],$data['cui'], $data['tipo_pago'], $data['descuento'], $data['detalles'])) {
             echo json_encode(['error' => 'Faltan datos requeridos']);
             return;
         }
@@ -55,7 +55,7 @@ class SalesController {
             $data['correo'],
             $data['nit'],
             $data['cui'],
-            $data['id_empleado'],
+            
             $data['tipo_pago'],
             $data['descuento'],
             $data['detalles']

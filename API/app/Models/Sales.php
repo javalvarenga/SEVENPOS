@@ -44,21 +44,22 @@ class Sales {
         return $factura;
     }
 
-    public function addVenta($nombre, $direccion, $telefono, $correo, $nit, $cui, $id_empleado, $tipo_pago, $descuento, $detalles) {
+    public function addVenta($nombre, $direccion, $telefono, $correo, $nit, $cui, $tipo_pago, $descuento, $detalles) {
     // Configurar la zona horaria a Guatemala
     date_default_timezone_set('America/Guatemala');
 
     // Obtener la fecha y hora actuales
     $fecha = date('Y-m-d H:i:s');
+    echo $fecha;
 
     // Convertir el array de detalles a JSON
     $detalles_json = json_encode($detalles);
 
     // Preparar la llamada al procedimiento almacenado
-    $stmt = $this->connection->prepare("CALL Insertarclienteventa(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $this->connection->prepare("CALL Insertarclienteventa(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
     // Vincular los parámetros al procedimiento almacenado
-    $stmt->bind_param('ssisiiissds', $nombre, $direccion, $telefono, $correo, $nit, $cui, $id_empleado, $fecha, $tipo_pago, $descuento, $detalles_json);
+    $stmt->bind_param('ssisiissds', $nombre, $direccion, $telefono, $correo, $nit, $cui, $fecha, $tipo_pago, $descuento, $detalles_json);
 
     // Ejecutar el procedimiento almacenado
     $stmt->execute();

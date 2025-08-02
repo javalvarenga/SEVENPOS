@@ -13,10 +13,10 @@ class UserController
 
         header('Content-Type: application/json');
 
-        if (!empty($user)) {
+        if (!empty($user) && count($user) > 0) {
             echo json_encode([
                 'success' => true,
-                'user' => $user
+                'user' => $user[0] // Tomar el primer usuario
             ]);
         } else {
             echo json_encode([

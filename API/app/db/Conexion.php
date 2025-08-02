@@ -1,9 +1,9 @@
 <?php
 class Database {
-    private $host = 'sevenpos.c9pbfyeukwau.us-east-2.rds.amazonaws.com';
-    private $username = 'Kevin';
-    private $password = 'Kevin2024.';
-    private $database = 'SevenPOS';
+    private $host = 'sevenp.ch604uea2iwy.us-east-2.rds.amazonaws.com';
+    private $username = 'admin';
+    private $password = 'Syspos-07';
+    private $database = 'seven';
     private $connection;
 
     // Método para conectar a la base de datos
